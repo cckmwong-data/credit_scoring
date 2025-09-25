@@ -47,7 +47,7 @@ else:
 # Create dataframe for input
 input_data = pd.DataFrame(
     [[income, credit_history, balance, employed, self_employed, unemployed]],
-    columns=['Income', 'Credit History', 'Outstanding Loan Balance', 'Employed', 'Self-Employed', 'Unemployed']
+    columns=['Income', 'Credit_History', 'Outstanding_Balance', 'Employed', 'Self-Employed', 'Unemployed']
 )
 
 # Scale input
