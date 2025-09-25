@@ -69,7 +69,10 @@ if st.button("Predict"):
     shap_values = explainer(input_data_scaled)
 
     st.subheader("🔎 What drove the decision?")
-
+    st.write("The gray value on the left (E[f(X)]) is the model’s average prediction (baseline).")
+    st.write("Red bars push the prediction higher (toward repayment), whereas blue bars push the prediction lower (toward default).")
+    st.write("The contributions add up to the final prediction shown on the right (f(x)).")
+    
     # Create a waterfall plot and render in Streamlit
     fig, ax = plt.subplots()
     shap.plots.waterfall(shap_values[0], show=False)
