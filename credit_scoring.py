@@ -31,7 +31,7 @@ st.title("💳 Credit Scoring Prediction App")
 st.write("Enter applicant details to predict the probability of loan repayment.")
 
 # User inputs
-income = st.number_input("Monthly Income (£)", min_value=0, value=2000, step=100)
+income = st.number_input("Annual Income (£)", min_value=0, value=2000, step=100)
 credit_history = st.slider("Credit History Score (0 = worst, 10 = best)", 0, 10, 5, 1)
 balance = st.number_input("Outstanding Loan Balance (£)", min_value=0, value=500, step=100)
 employment_status = st.radio("Employment Status", ("Employed", "Self-Employed", "Unemployed"))
