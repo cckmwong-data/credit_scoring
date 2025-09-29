@@ -44,11 +44,11 @@ elif employment_status == "Self-Employed":
 else:
     employed, self_employed, unemployed = 0, 0, 1
 
+DTI = balance_/ income
+
 # Create dataframe for input
-input_data = pd.DataFrame(
-    [[income, credit_history, balance, employed, self_employed, unemployed]],
-    columns=['Income', 'Credit_History', 'Outstanding_Balance', 'Employed', 'Self-Employed', 'Unemployed']
-)
+input_data = pd.DataFrame([[DTI, credit_history, employed, self_employed, unemployed]], 
+columns=['DTI', 'Credit_History','Employed', 'Self-Employed', 'Unemployed'])
 
 # Scale input
 input_data_scaled = scaler.transform(input_data)
