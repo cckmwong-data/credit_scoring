@@ -44,7 +44,7 @@ elif employment_status == "Self-Employed":
 else:
     employed, self_employed, unemployed = 0, 0, 1
 
-DTI = balance_/ income
+DTI = balance/ income
 
 # Create dataframe for input
 input_data = pd.DataFrame([[DTI, credit_history, employed, self_employed, unemployed]], 
