@@ -31,9 +31,10 @@ st.title("💳 Credit Scoring Prediction App")
 st.write("Enter applicant details to predict the probability of loan repayment.")
 
 # User inputs
-income = st.number_input("Monthly Income (£)", min_value=0, value=2000, step=100)
+age = st.number_input("Age", min_value = 18, step = 1)
+income = st.number_input("Monthly Income (£)", min_value=0, step=100)
 credit_history = st.slider("Credit History Score (0 = worst, 10 = best)", 0, 10, 5, 1)
-balance = st.number_input("Loan Amount (£)", min_value=0, value=500, step=100)
+balance = st.number_input("Loan Amount (£)", min_value=0, step=100)
 employment_status = st.radio("Employment Status", ("Employed", "Self-Employed", "Unemployed"))
 
 # Convert employment status to dummies
@@ -47,8 +48,8 @@ else:
 DTI = balance/ income
 
 # Create dataframe for input
-input_data = pd.DataFrame([[DTI, credit_history, employed, self_employed, unemployed]], 
-columns=['DTI', 'Credit_History','Employed', 'Self-Employed', 'Unemployed'])
+input_data = pd.DataFrame([[age, DTI, credit_history, employed, self_employed, unemployed]], 
+columns=['Age', 'DTI', 'Credit_History','Employed', 'Self-Employed', 'Unemployed'])
 
 # Scale input
 input_data_scaled = scaler.transform(input_data)
