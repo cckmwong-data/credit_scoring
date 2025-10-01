@@ -27,7 +27,7 @@ with open("credit_explainer.pkl", "rb") as f:
 # -------------------------------
 # Streamlit App
 # -------------------------------
-st.title("💳 Credit Scoring Prediction App")
+st.title("💳 Loan Approval Prediction")
 st.write("Enter applicant details to predict the probability of loan repayment.")
 
 # User inputs
@@ -56,10 +56,10 @@ input_data_scaled = scaler.transform(input_data)
 
 # Prediction
 if st.button("Predict"):
-    prob_repay = model.predict_proba(input_data_scaled)[0][1]  # class 1 = repay
-    prob_default = model.predict_proba(input_data_scaled)[0][0]
+    prob_default = model.predict_proba(input_data_scaled)[0][1]   # class 1 = default
+    prob_repay   = model.predict_proba(input_data_scaled)[0][0]   # class 0 = non-default
 
-    prediction = "YES ✅ (Likely to Repay)" if prob_repay >= 0.5 else "NO ❌ (Likely to Default)"
+    prediction = "Loan Approval: Yes ✅ (Likely to Repay)" if prob_default <= 0.5 else "Loan Approval: NO ❌ (Likely to Default)"
 
     st.subheader("Prediction Result")
     st.write(f"**Prediction:** {prediction}")
