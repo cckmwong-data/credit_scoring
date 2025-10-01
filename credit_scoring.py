@@ -31,7 +31,7 @@ st.title("💳 Loan Approval Prediction")
 st.write("Enter applicant details to predict the probability of loan repayment.")
 
 # User inputs
-age = st.number_input("Age", min_value = 18, step = 1)
+age = st.number_input("Age", min_value = 30, step = 1)
 income = st.number_input("Monthly Income (£)", min_value=0, value = 2000, step=100)
 credit_history = st.slider("Credit History Score (0 = worst, 10 = best)", 0, 10, 5, 1)
 balance = st.number_input("Loan Amount (£)", min_value=0, value = 200, step=100)
@@ -59,10 +59,10 @@ if st.button("Predict"):
     prob_default = model.predict_proba(input_data_scaled)[0][1]   # class 1 = default
     prob_repay   = model.predict_proba(input_data_scaled)[0][0]   # class 0 = non-default
 
-    prediction = "Loan Approval: Yes ✅ (Likely to Repay)" if prob_default <= 0.5 else "Loan Approval: NO ❌ (Likely to Default)"
+    prediction = "Yes ✅ (Likely to Repay)" if prob_default <= 0.5 else "NO ❌ (Likely to Default)"
 
     st.subheader("Prediction Result")
-    st.write(f"**Prediction:** {prediction}")
+    st.write(f"**Loan Approval:** {prediction}")
     st.write(f"**Repayment Probability:** {prob_repay*100:.2f}%")
     st.write(f"**Default Probability:** {prob_default*100:.2f}%")
 
@@ -70,7 +70,7 @@ if st.button("Predict"):
     shap_values = explainer(input_data_scaled)
 
     st.subheader("🔎 What drove the decision?")
-    st.write("Red bars push the prediction higher towards repayment, whereas blue bars push the prediction lower towards default. The contributions add up to the final prediction shown on the right (f(x)).")
+    st.write("Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction shown on the right (f(x)).")
     st.write("The gray value on the left (E[f(X)]) is the model’s average prediction (baseline).")
     st.write("Remarks: DTI (debt-to-income ratio) is to assess a borrower’s ability to manage monthly payments and repay debts. DTI = Total Monthly Debt Payments/ Monthly Income")
 
