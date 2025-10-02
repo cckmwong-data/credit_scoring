@@ -59,10 +59,10 @@ if st.button("Predict"):
     prob_default = model.predict_proba(input_data_scaled)[0][1]   # class 1 = default
     prob_repay   = model.predict_proba(input_data_scaled)[0][0]   # class 0 = non-default
 
-    prediction = "Yes ✅ (Likely to Repay)" if prob_default <= 0.40 else "NO ❌ (Likely to Default)"
+    prediction = "Yes ✅ (Likely to Repay)" if prob_default <= 0.35 else "NO ❌ (Likely to Default)"
 
     st.subheader("Prediction Result")
-    st.write("In practice, banks adopt a more conservative approach by setting a lower decision threshold for default probability. For example, instead of the standard 0.5, a threshold of 0.4 may be used. This ensures that applicants with even a moderate risk of default are flagged as high risk, reducing the likelihood of approving loans to potentially risky borrowers.")
+    st.write("In practice, banks adopt a prudent approach by setting a lower decision threshold for default probability. Instead of the standard 0.5, a threshold of 0.35 is used in this application. This ensures that applicants with even a moderate risk of default are flagged as high risk, reducing the likelihood of approving loans to potentially risky borrowers.")
     st.write(f"**Loan Approval:** {prediction}")
     st.write(f"**Repayment Probability:** {prob_repay*100:.2f}%")
     st.write(f"**Default Probability:** {prob_default*100:.2f}%")
