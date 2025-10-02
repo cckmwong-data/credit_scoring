@@ -71,7 +71,7 @@ if st.button("Predict"):
 
     st.subheader("🔎 What drove the decision?")
     st.write("Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction f(x).")
-    st.write("The gray value on the left (E[f(X)]) is the model’s average prediction (baseline).")
+    st.write("The gray value on the left (E[f(X)]) is the model’s average prediction.")
     st.write("Remarks: DTI (debt-to-income ratio) is to assess a borrower’s ability to manage monthly payments and repay debts. DTI = Total Monthly Debt Payments/ Monthly Income")
 
     # Create a waterfall plot and render in Streamlit
