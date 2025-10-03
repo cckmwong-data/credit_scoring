@@ -64,13 +64,32 @@ if st.button("Predict"):
 
     st.subheader("Prediction Result")
     st.write(f"The lender adopts a prudent approach by setting a lower decision threshold of 35% compared to the standard 50%. {apply_reason}**{apply_result}**")
-    st.write(f"**Default Probability:** {prob_default*100:.2f}%")
-    st.write(f"**Repayment Probability:** {prob_repay*100:.2f}%")
+    st.write(f"Default Probability: **{prob_default*100:.2f}%**")
+    st.write(f"Repayment Probability: **{prob_repay*100:.2f}%**")
 
 
     # Get SHAP values
     shap_values = explainer(input_data_scaled)
+    feature_names = input_data_scaled.columns 
 
+    approved_shap = 0
+    approved_label
+    declined_shap = 0
+    declined_label
+
+    if prob_default <= 0.35: # approval case where shap values < 0
+        for i in len(shap_values):
+            if shap_values[i] < 0 and np.abs(shap_values[i]) > approved_shap:
+                approved_label = feature_names[i]
+        st.write(shap_values[i])
+        st.write(feature_names[i])
+    else: # declined case where shap values > 0
+        for i in len(shap_values):
+            if shap_values[i] < 0 and np.abs(shap_values[i]) > declined_shap:
+                declined_label = feature_names[i]
+        st.write(shap_values[i])
+        st.write(feature_names[i])         
+        
     st.subheader("🔎 What drove the decision?")
     st.write("Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction f(x).")
     st.write("The gray value on the left (E[f(X)]) is the model’s average prediction.")
