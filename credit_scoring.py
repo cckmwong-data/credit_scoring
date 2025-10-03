@@ -77,14 +77,17 @@ if st.button("Predict"):
     declined_shap = 0
     declined_label = ""
 
+    # Get the SHAP values for the first row as a 1D array
+    sv_row = shap_values.values[0]  
+
     if prob_default <= 0.35: # approval case where shap values < 0
-        for i in len(shap_values):
+        for i in range(len(sv_row)):
             if shap_values[i] < 0 and np.abs(shap_values[i]) > approved_shap:
                 approved_label = feature_names[i]
         st.write(shap_values[i])
         st.write(feature_names[i])
     else: # declined case where shap values > 0
-        for i in len(shap_values):
+        for i in range(len(sv_row)):
             if shap_values[i] < 0 and np.abs(shap_values[i]) > declined_shap:
                 declined_label = feature_names[i]
         st.write(shap_values[i])
