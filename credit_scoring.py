@@ -78,5 +78,5 @@ if st.button("Predict"):
     shap.plots.waterfall(shap_values[0], show=False)
     st.pyplot(fig)
 
-    st.write("Remarks: Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction f(x). The gray value on the left (E[f(X)]) is the model’s average prediction.")
-    st.write("DTI (debt-to-income ratio) is to assess a borrower’s ability to manage monthly payments and repay debts. DTI = Total Monthly Debt Payments/ Monthly Income")
+    st.write("Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction f(x). E[f(X)] is the model’s average prediction.")
+    st.write("Remarks: DTI (debt-to-income ratio) is to assess a borrower’s ability to manage monthly payments and repay debts. DTI = Total Monthly Debt Payments/ Monthly Income")
