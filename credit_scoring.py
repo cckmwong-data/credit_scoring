@@ -33,7 +33,7 @@ st.write("Enter applicant details to predict the probability of loan repayment."
 # User inputs
 age = st.number_input("Age", min_value = 18, value = 30, max_value = 100 ,step = 1)
 income = st.number_input("Monthly Income (£)", min_value=0, value = 2000, step=100)
-credit_history = st.slider("Credit History Score (0 = worst, 10 = best)", 0, 10, 5, 1)
+credit_history = st.slider("CrediAt History Score (0 = worst, 10 = best)", 0, 10, 5, 1)
 balance = st.number_input("Loan Amount (£)", min_value=0, value = 200, step=100)
 employment_status = st.radio("Employment Status", ("Employed", "Self-Employed", "Unemployed"))
 
@@ -70,7 +70,7 @@ if st.button("Predict"):
 
     # Get SHAP values
     shap_values = explainer(input_data_scaled)
-    feature_names = input_data_scaled.columns 
+    feature_names = input_data.columns
 
     approved_shap = 0
     approved_label
