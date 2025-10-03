@@ -82,15 +82,15 @@ if st.button("Predict"):
 
     if prob_default <= 0.35: # approval case where shap values < 0
         for i in range(len(sv_row)):
-            if shap_values[i] < 0 and np.abs(shap_values[i]) > approved_shap:
+            if shap_values[0][i] < 0 and np.abs(shap_values[0][i]) > approved_shap:
                 approved_label = feature_names[i]
-        st.write(shap_values[i])
+        st.write(shap_values[0][i])
         st.write(feature_names[i])
     else: # declined case where shap values > 0
         for i in range(len(sv_row)):
-            if shap_values[i] < 0 and np.abs(shap_values[i]) > declined_shap:
+            if shap_values[0][i] < 0 and np.abs(shap_values[0][i]) > declined_shap:
                 declined_label = feature_names[i]
-        st.write(shap_values[i])
+        st.write(shap_values[0][i])
         st.write(feature_names[i])         
         
     st.subheader("🔎 What drove the decision?")
