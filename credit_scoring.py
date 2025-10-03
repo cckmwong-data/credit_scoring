@@ -70,35 +70,13 @@ if st.button("Predict"):
 
     # Get SHAP values
     shap_values = explainer(input_data_scaled)
-    feature_names = input_data.columns
-
-    approved_shap = 0
-    approved_label = ""
-    declined_shap = 0
-    declined_label = ""
-
-    # Get the SHAP values for the first row as a 1D array
-    sv_row = shap_values.values[0]  
-
-    if prob_default <= 0.35: # approval case where shap values < 0
-        for i in range(len(sv_row)):
-            if shap_values[0][i] < 0 and np.abs(shap_values[0][i]) > approved_shap:
-                approved_label = feature_names[i]
-        st.write(shap_values[0][i])
-        st.write(feature_names[i])
-    else: # declined case where shap values > 0
-        for i in range(len(sv_row)):
-            if shap_values[0][i] < 0 and np.abs(shap_values[0][i]) > declined_shap:
-                declined_label = feature_names[i]
-        st.write(shap_values[0][i])
-        st.write(feature_names[i])         
-        
+         
     st.subheader("🔎 What drove the decision?")
-    st.write("Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction f(x).")
-    st.write("The gray value on the left (E[f(X)]) is the model’s average prediction.")
-    st.write("Remarks: DTI (debt-to-income ratio) is to assess a borrower’s ability to manage monthly payments and repay debts. DTI = Total Monthly Debt Payments/ Monthly Income")
 
     # Create a waterfall plot and render in Streamlit
     fig, ax = plt.subplots()
     shap.plots.waterfall(shap_values[0], show=False)
     st.pyplot(fig)
+
+    st.write("Remarks: Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction f(x). The gray value on the left (E[f(X)]) is the model’s average prediction.")
+    st.write("DTI (debt-to-income ratio) is to assess a borrower’s ability to manage monthly payments and repay debts. DTI = Total Monthly Debt Payments/ Monthly Income")
