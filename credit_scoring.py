@@ -79,4 +79,4 @@ if st.button("Predict"):
     st.pyplot(fig)
 
     st.write("Blue bars push the prediction higher towards repayment, whereas red bars push the prediction lower towards default. The contributions add up to the final prediction f(x). E[f(X)] is the model’s average prediction.")
-    st.write("Remarks: DTI (debt-to-income ratio) is to assess a borrower’s ability to manage monthly payments and repay debts. DTI = Total Monthly Debt Payments/ Monthly Income")
+    st.write("Remarks: DTI (debt-to-income ratio) = Total Monthly Debt Payments/ Monthly Income, is to assess a borrower’s ability to manage monthly payments and repay debts.")
