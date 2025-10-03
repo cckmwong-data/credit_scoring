@@ -73,9 +73,9 @@ if st.button("Predict"):
     feature_names = input_data.columns
 
     approved_shap = 0
-    approved_label
+    approved_label = ""
     declined_shap = 0
-    declined_label
+    declined_label = ""
 
     if prob_default <= 0.35: # approval case where shap values < 0
         for i in len(shap_values):
