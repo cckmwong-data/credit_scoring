@@ -60,7 +60,7 @@ if st.button("Predict"):
     prob_repay   = model.predict_proba(input_data_scaled)[0][0]   # class 0 = non-default
 
     apply_result = "APPROVED ✅." if prob_default <= 0.35 else "DECLINED ❌."
-    apply_reason = "As the default probability falls below this thresold, the loan application is " if prob_default <= 0.35 else "As the repayment probability is above this thresold, the loan application is "
+    apply_reason = "As the default probability falls below this thresold, the loan application is " if prob_default <= 0.35 else "As the default probability is above this thresold, the loan application is "
 
     st.subheader("Prediction Result")
     st.write(f"The lender adopts a prudent approach by setting a lower decision threshold of 35% compared to the standard 50%. {apply_reason}**{apply_result}**")
