@@ -1,3 +1,6 @@
+# -------------------------------
+# Import Libraries
+# -------------------------------
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -10,10 +13,6 @@ from sklearn.linear_model import LogisticRegression
 # -------------------------------
 # Load model and scaler
 # -------------------------------
-# You can save your trained model & scaler as pickle files in your notebook first
-# Example in notebook:
-#   with open("model.pkl", "wb") as f: pickle.dump(model, f)
-#   with open("scaler.pkl", "wb") as f: pickle.dump(scaler, f)
 
 with open("credit_model.pkl", "rb") as f:
     model = pickle.load(f)
@@ -45,13 +44,14 @@ elif employment_status == "Self-Employed":
 else:
     employed, self_employed, unemployed = 0, 0, 1
 
+# Define Debt-to-Income ratio
 DTI = balance/ income
 
 # Create dataframe for input
 input_data = pd.DataFrame([[age, DTI, credit_history, employed, self_employed, unemployed]], 
 columns=['Age', 'DTI', 'Credit_History','Employed', 'Self-Employed', 'Unemployed'])
 
-# Scale input
+# Scale inputs
 input_data_scaled = scaler.transform(input_data)
 
 # Prediction
@@ -59,14 +59,15 @@ if st.button("Predict"):
     prob_default = model.predict_proba(input_data_scaled)[0][1]   # class 1 = default
     prob_repay   = model.predict_proba(input_data_scaled)[0][0]   # class 0 = non-default
 
+    # Results of the loan application
     apply_result = "APPROVED ✅." if prob_default <= 0.35 else "DECLINED ❌."
+    # Reasons
     apply_reason = "Given that the applicant’s default probability falls below this threshold, the loan application is " if prob_default <= 0.35 else "Given that the applicant’s default probability surpasses this threshold, the loan application is "
 
     st.subheader("Prediction Result")
     st.write(f"To maintain prudent risk management, the lender applies a reduced decision threshold of 35% rather than the standard 50%. {apply_reason}**{apply_result}**")
     st.write(f"Default Probability: **{prob_default*100:.2f}%**")
     st.write(f"Repayment Probability: **{prob_repay*100:.2f}%**")
-
 
     # Get SHAP values
     shap_values = explainer(input_data_scaled)
