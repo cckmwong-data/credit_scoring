@@ -24,9 +24,9 @@ st.title("💳 Loan Approval Prediction")
 
 with st.expander("ℹ️ About This App"):
     st.markdown("""
-This application demonstrates a Loan Approval Prediction model that estimates the probability of an applicant successfully repaying a loan. By entering key applicant details such as **age**, **monthly income**, **credit history score**, **loan amount**, and **employment status**, the model predicts both **default** and **repayment probabilities**.
+This application demonstrates a Loan Approval Prediction model that estimates the probability of an applicant successfully repaying a loan. By entering key applicant details such as age, monthly income, credit history score, loan amount, and employment status, the model predicts both default and repayment probabilities.
 
-The goal of the model is to assist lenders in making more data-driven and consistent lending decisions by quantifying the likelihood of default. To maintain prudent risk management, a custom decision threshold (lower than 35%) is applied to account for the lender’s risk tolerance.
+The goal of the model is to assist lenders in making more data-driven and consistent lending decisions by quantifying the likelihood of default. To maintain prudent risk management, a custom decision threshold (**lower than 35%**) is applied to account for the lender’s risk tolerance.
 
 In addition to the prediction result, the app provides a visual explanation of what factors most influenced the decision. Blue bars indicate factors that increased the likelihood of loan repayment, while red bars show factors that contributed to default risk. This transparency helps both lenders and applicants understand how individual variables impact the final outcome.
 """)
