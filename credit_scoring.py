@@ -1,6 +1,4 @@
-# -------------------------------
-# Import Libraries
-# -------------------------------
+# ------------------------------- Import Libraries -------------------------------
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -10,9 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LogisticRegression
 
-# -------------------------------
-# Load model and scaler
-# -------------------------------
+# ------------------------------- Load model and scaler -------------------------------
 
 with open("credit_model.pkl", "rb") as f:
     model = pickle.load(f)
@@ -23,16 +19,14 @@ with open("credit_scaler.pkl", "rb") as f:
 with open("credit_explainer.pkl", "rb") as f:
     explainer = pickle.load(f)
 
-# -------------------------------
-# Streamlit App
-# -------------------------------
+# ------------------------------- Streamlit App -------------------------------
 st.title("💳 Loan Approval Prediction")
 st.write("Enter applicant details to predict the probability of loan repayment.")
 
 # User inputs
 age = st.number_input("Age", min_value = 18, value = 30, max_value = 100 ,step = 1)
 income = st.number_input("Monthly Income (£)", min_value=0, value = 2000, step=100)
-credit_history = st.slider("CrediAt History Score (0 = worst, 10 = best)", 0, 10, 5, 1)
+credit_history = st.slider("Credit History Score (0 = worst, 10 = best)", 0, 10, 5, 1)
 balance = st.number_input("Loan Amount (£)", min_value=0, value = 200, step=100)
 employment_status = st.radio("Employment Status", ("Employed", "Self-Employed", "Unemployed"))
 
