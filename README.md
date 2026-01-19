@@ -14,6 +14,8 @@ An end-to-end loan approval prediction system using Logistic Regression to model
 - Implemented SHAP explainability to expose feature contributions at the individual applicant level.
 - Deployed the trained model, scaler, and SHAP explainer via a Streamlit app that returns probabilities, approval decisions, and a SHAP waterfall plot.
 
+<img src="./images/shap.png" width="" height="500">
+
 ---
 
 ## Skills Demonstrated
