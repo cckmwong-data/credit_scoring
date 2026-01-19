@@ -8,14 +8,12 @@ An end-to-end loan approval prediction system using Logistic Regression to model
 
 ## Highlights
 
-- Built a full pipeline from raw loan data to a deployed, interactive credit scoring interface.
-- Engineered a Debt-to-Income (DTI) ratio feature and transformed employment status into machine-readable dummy variables.
-- Trained a Logistic Regression model (with class weighting and feature scaling) to predict borrower default.
-- Evaluated the model with recall, PR-AUC, ROC-AUC, and F1-score, focusing on catching true defaulters.
-- Implemented SHAP explainability to expose feature contributions at the individual applicant level.
+- Built a **full pipeline** from raw loan data to a deployed, interactive credit scoring interface.
+- Engineered a **Debt-to-Income (DTI) ratio** feature and transformed employment status into machine-readable dummy variables.
+- Trained a **Logistic Regression** model (with class weighting and feature scaling) to predict borrower default.
+- Evaluated the model with **recall**, **PR-AUC**, **ROC-AUC**, and **F1-score**, focusing on catching true defaulters.
+- Implemented **SHAP explainability** to expose feature contributions at the individual applicant level.
 - Deployed the trained model, scaler, and SHAP explainer via a Streamlit app that returns probabilities, approval decisions, and a SHAP waterfall plot.
-
-<img src="./images/shap.png" width="" height="500">
 
 ---
 
@@ -40,7 +38,7 @@ Financial institutions must assess borrower creditworthiness to minimize default
 
 ## Project Overview
 
-A tabular loan [dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. The workflow:
+A loan [dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. The workflow:
 
 1. Load and clean the dataset (drop non-predictive identifiers and redundant columns such as `Client_ID` and `Gender`).
 2. Engineer risk-relevant features, notably the Debt-to-Income (DTI) ratio derived from monthly income and repayment amounts.
@@ -50,6 +48,8 @@ A tabular loan [dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loa
 6. Build a SHAP explainer to provide local (per-applicant) feature attribution.
 7. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
+<img src="./images/shap.png" width="" height="500">
+
 ---
 
 ## Key Technical Decisions
@@ -58,26 +58,16 @@ A tabular loan [dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loa
 
 Chosen for interpretability and suitability in credit risk settings. The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny.
 
-### Target & Features
-
-- **Target:** `Default_Flag` (binary indicator of whether the borrower defaulted).  
-- **Features used in the final model:**
-  - `Age`
-  - `DTI` (Debt-to-Income ratio = `Monthly_Repayment` / `Monthly_Income`)
-  - `Credit_History`
-  - Dummy variables: `Employed`, `Self-Employed`, `Unemployed`
-
 ### Feature Engineering
 
 - Created **DTI** from income and repayment to capture leverage and repayment burden.  
-- One-hot encoded the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`).  
+- **One-hot encoded** the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`).  
 - Dropped redundant raw columns (`Monthly_Income`, `Monthly_Repayment`, original `Employment`) once the engineered variables were in place.
 
 ### Scaling Strategy
 
 - Used **StandardScaler** to standardize features before training Logistic Regression.
-- **Why StandardScaler? (brief)**  
-  Logistic Regression benefits from standardized feature variance: scaling features to zero mean and unit variance improves solver stability and makes coefficients more directly comparable across features. This is more suitable here than MinMax scaling, which mainly rescales to a fixed range and is less convenient for interpreting linear model coefficients.
+- Logistic Regression benefits from standardized feature variance: scaling features to zero mean and unit variance improves solver stability and makes coefficients more directly comparable across features. This is more suitable here than MinMax scaling, which mainly rescales to a fixed range and is less convenient for interpreting linear model coefficients.
 - The fitted scaler is persisted and reused in the application to ensure consistent preprocessing between training and inference.
 
 ### Class Imbalance Handling
@@ -89,7 +79,7 @@ Chosen for interpretability and suitability in credit risk settings. The model�
 - Evaluated the model using recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score.  
 - Particular emphasis on recall for defaulters and PR-AUC to ensure genuine defaults are captured with acceptable levels of false positives.
 
-### Operational Threshold
+### Prudent Operational Threshold
 
 Instead of using a naïve 50% default probability cutoff, a more conservative decision threshold of **35% default probability** is used in the Streamlit app:
 
@@ -114,13 +104,9 @@ This reflects a lender’s risk tolerance and aligns the model with business pol
 
 ### Model Performance
 
-- The model achieves strong recall for defaulters (around ~0.8+ as described in the notebook narrative), meaning a large share of true defaulters are correctly flagged.
-- High PR-AUC and ROC-AUC scores indicate that the model separates defaulters from non-defaulters effectively and performs well across classification thresholds.
-
-### Business Impact
-
-- By using an explicit 35% risk threshold, a lender can balance portfolio risk versus approval volume and reason about the trade-off.
-- SHAP explanations make each decision auditable and easier to justify to stakeholders, supporting both internal risk governance and external communication with applicants.
+- The model achieves a recall of 0.84 for defaulters (class 0), meaning it successfully identifies most risky borrowers.
+- It also records a strong PR-AUC score, reflecting its ability to balance precision and recall in the imbalanced dataset.
+- A very high ROC-AUC of 0.95 shows excellent overall discrimination between repayers and defaulters.
 
 ---
 
