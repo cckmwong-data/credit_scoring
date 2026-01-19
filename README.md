@@ -3,6 +3,7 @@
 An end-to-end loan approval prediction system using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
 
 <img src="./images/app1.png" width="" height="500">
+
 ---
 
 ## Highlights
