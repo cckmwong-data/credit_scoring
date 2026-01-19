@@ -1,0 +1,242 @@
+# Loan Approval Prediction using Logistic Regression
+
+## Short Description
+
+An end-to-end loan approval prediction system using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
+
+
+---
+
+## Highlights
+
+- Built a full pipeline from raw loan data to a deployed, interactive credit scoring interface.
+- Engineered a Debt-to-Income (DTI) ratio feature and transformed employment status into machine-readable dummy variables.
+- Trained a Logistic Regression model (with class weighting and feature scaling) to predict borrower default.
+- Evaluated the model with recall, PR-AUC, ROC-AUC, and F1-score, focusing on catching true defaulters.
+- Implemented SHAP explainability to expose feature contributions at the individual applicant level.
+- Deployed the trained model, scaler, and SHAP explainer via a Streamlit app that returns probabilities, approval decisions, and a SHAP waterfall plot.
+
+---
+
+## Skills Demonstrated
+
+- Supervised learning for binary classification  
+- Credit risk modelling and loan approval decisioning  
+- Feature engineering for financial datasets (DTI, categorical encoding)  
+- Model evaluation and interpretation (coefficients, SHAP, classification metrics)  
+- Handling class imbalance with `class_weight="balanced"`  
+- Persisting models and scalers (pickle)  
+- Building and deploying a data app with Streamlit  
+- Python data stack: pandas, NumPy, scikit-learn, matplotlib, seaborn, shap  
+
+---
+
+## Problem Statement
+
+Financial institutions must assess borrower creditworthiness to minimize default risk, but manual or rule-based approaches can be inconsistent and suboptimal. This project aims to build an interpretable, data-driven model that predicts whether a borrower will default on a loan and to operationalize that model in a way that supports consistent, transparent loan approval decisions.
+
+---
+
+## Project Overview
+
+A tabular loan [dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. The workflow:
+
+1. Load and clean the dataset (drop non-predictive identifiers and redundant columns such as `Client_ID` and `Gender`).
+2. Engineer risk-relevant features, notably the Debt-to-Income (DTI) ratio derived from monthly income and repayment amounts.
+3. Encode employment status as dummy variables (`Employed`, `Self-Employed`, `Unemployed`) to represent employment types numerically.
+4. Use Logistic Regression to predict the binary `Default_Flag` (default vs non-default) based on features including age, DTI, credit history, and employment.
+5. Evaluate performance with multiple classification metrics, emphasizing recall for defaulters and precision–recall/ROC curves.
+6. Build a SHAP explainer to provide local (per-applicant) feature attribution.
+7. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
+
+---
+
+## Key Technical Decisions
+
+### Algorithm Choice – Logistic Regression
+
+Chosen for interpretability and suitability in credit risk settings. The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny.
+
+### Target & Features
+
+- **Target:** `Default_Flag` (binary indicator of whether the borrower defaulted).  
+- **Features used in the final model:**
+  - `Age`
+  - `DTI` (Debt-to-Income ratio = `Monthly_Repayment` / `Monthly_Income`)
+  - `Credit_History`
+  - Dummy variables: `Employed`, `Self-Employed`, `Unemployed`
+
+### Feature Engineering
+
+- Created **DTI** from income and repayment to capture leverage and repayment burden.  
+- One-hot encoded the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`).  
+- Dropped redundant raw columns (`Monthly_Income`, `Monthly_Repayment`, original `Employment`) once the engineered variables were in place.
+
+### Scaling Strategy
+
+- Used **StandardScaler** to standardize features before training Logistic Regression.
+- **Why StandardScaler? (brief)**  
+  Logistic Regression benefits from standardized feature variance: scaling features to zero mean and unit variance improves solver stability and makes coefficients more directly comparable across features. This is more suitable here than MinMax scaling, which mainly rescales to a fixed range and is less convenient for interpreting linear model coefficients.
+- The fitted scaler is persisted and reused in the application to ensure consistent preprocessing between training and inference.
+
+### Class Imbalance Handling
+
+- Set `class_weight="balanced"` in Logistic Regression to give additional weight to the minority class (defaulters), reducing the risk of a high-accuracy but low-recall model on defaults.
+
+### Evaluation Focus
+
+- Evaluated the model using recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score.  
+- Particular emphasis on recall for defaulters and PR-AUC to ensure genuine defaults are captured with acceptable levels of false positives.
+
+### Operational Threshold
+
+Instead of using a naïve 50% default probability cutoff, a more conservative decision threshold of **35% default probability** is used in the Streamlit app:
+
+- Default probability **≤ 35%** → **“APPROVED”**  
+- Default probability **> 35%** → **“DECLINED”**
+
+This reflects a lender’s risk tolerance and aligns the model with business policy.
+
+### Explainability – SHAP
+
+- Built a SHAP `Explainer` on the trained Logistic Regression model and training data to compute local SHAP values.
+- Saved and integrated this explainer into the app to generate applicant-level waterfall plots, showing how each feature pushes the prediction towards repayment or default.
+
+---
+
+## Key Insights & Impacts
+
+### Feature Effects
+
+- The Logistic Regression coefficients and SHAP attributions show that DTI and repayment burden are major drivers of default risk.
+- Stronger credit history and certain employment types are associated with improved repayment likelihood.
+
+### Model Performance
+
+- The model achieves strong recall for defaulters (around ~0.8+ as described in the notebook narrative), meaning a large share of true defaulters are correctly flagged.
+- High PR-AUC and ROC-AUC scores indicate that the model separates defaulters from non-defaulters effectively and performs well across classification thresholds.
+
+### Business Impact
+
+- By using an explicit 35% risk threshold, a lender can balance portfolio risk versus approval volume and reason about the trade-off.
+- SHAP explanations make each decision auditable and easier to justify to stakeholders, supporting both internal risk governance and external communication with applicants.
+
+---
+
+## Stages of Development
+
+1. **Problem Framing & Design**  
+   - Defined the business problem as predicting borrower default to support loan approval decisions, with a need for interpretability and explainability.
+
+2. **Data Ingestion & Cleaning**  
+   - Imported the Kaggle Loan Approval Classification dataset.  
+   - Dropped non-informative columns (`Client_ID`, `Gender`).  
+   - Removed duplicates and checked for missing values.
+
+3. **Feature Engineering & Transformation**  
+   - Created `DTI = Monthly_Repayment / Monthly_Income`.  
+   - One-hot encoded `Employment` into `Employed`, `Self-Employed`, and `Unemployed`.  
+   - Converted dummy columns to numeric (1/0) and dropped original employment and raw income/repayment columns as needed.
+
+4. **Train/Test Split & Scaling**  
+   - Split data into training (70%) and test (30%) sets.  
+   - Applied `StandardScaler` to the training features and transformed the test features with the same scaler.
+
+5. **Model Training**  
+   - Trained `LogisticRegression(class_weight="balanced", max_iter=1000, random_state=42)` on scaled features.  
+   - Inspected coefficients and odds ratios to understand the relative importance and directionality of each feature.
+
+6. **Evaluation & Diagnostics**  
+   - Generated predictions and confusion matrix.  
+   - Calculated key metrics: recall for default class, PR-AUC, ROC-AUC, precision, F1-score.  
+   - Interpreted metric values in the context of risk tolerance and desired trade-offs.
+
+7. **Explainability Integration**  
+   - Constructed a SHAP explainer using the trained model and training data.  
+   - Verified that SHAP values aligned with model coefficients and domain intuition.
+
+8. **Model & Artifact Persistence**  
+   - Serialized and saved:
+     - `credit_model.pkl` – trained Logistic Regression model  
+     - `credit_scaler.pkl` – fitted `StandardScaler`  
+     - `credit_explainer.pkl` – SHAP explainer  
+
+9. **Streamlit App Development & Deployment**  
+   - Built the Streamlit front-end that loads the saved artifacts and provides real-time predictions, explanations, and approval decisions.
+
+---
+
+## Technologies Used (Model Explanation)
+
+### Python & Data Stack
+
+- **pandas**, **NumPy** for data manipulation and feature engineering.  
+- **matplotlib**, **seaborn** for exploratory data analysis and visualization.
+
+### Modeling (scikit-learn)
+
+- `LogisticRegression` for binary classification of `Default_Flag`.  
+- `StandardScaler` for feature standardization.  
+- `train_test_split` for splitting data into training and test sets.  
+- `classification_report`, `confusion_matrix`, `roc_auc_score`, `average_precision_score`, `recall_score` for model evaluation.
+
+### Explainability (SHAP)
+
+- `shap.Explainer` built on the trained Logistic Regression model and training data.  
+- SHAP waterfall plots to show the contribution of each feature to an individual prediction, highlighting which factors push the score towards default or repayment.
+
+### Model Persistence (pickle)
+
+- `pickle.dump` and `pickle.load` used to serialize and reload the model, scaler, and SHAP explainer for deployment.
+
+### App Framework (Streamlit)
+
+- Streamlit provides a lightweight web interface to:
+  - Collect applicant inputs  
+  - Invoke the model pipeline  
+  - Display predictions, decisions, and SHAP-based explanations  
+
+---
+
+## Streamlit Application
+
+The `credit_scoring.py` Streamlit app operationalizes the notebook work as a user-facing tool:
+
+### Inputs
+
+- `Age` (numeric input, 18–100)  
+- `Monthly Income (£)` (numeric input)  
+- `Credit History Score` (slider from 0 = worst to 10 = best)  
+- `Loan Amount (£)` – used with income to compute DTI  
+- `Employment Status` – radio selection: `Employed`, `Self-Employed`, or `Unemployed`
+
+### Feature Construction in the App
+
+- Computes DTI in real time: `DTI = Loan Amount / Monthly Income`.  
+- Converts selected employment status into dummy variables (`Employed`, `Self-Employed`, `Unemployed`).  
+- Assembles a single-row `DataFrame` with the same feature schema used in training:  
+  `['Age', 'DTI', 'Credit_History', 'Employed', 'Self-Employed', 'Unemployed']`.  
+- Applies the persisted scaler (`credit_scaler.pkl`) to standardize the input.
+
+### Prediction & Decision Logic
+
+- Uses the loaded Logistic Regression model (`credit_model.pkl`) to compute:  
+  - `prob_default` – probability of default (class 1)  
+  - `prob_repay` – probability of repayment/non-default (class 0)  
+
+- Applies the 35% default probability threshold:
+  - `prob_default ≤ 0.35` → loan application **“APPROVED ✅”**  
+  - `prob_default > 0.35` → loan application **“DECLINED ❌”**  
+
+### Explainability & Visual Output
+
+- Invokes the loaded SHAP explainer (`credit_explainer.pkl`) on the scaled input row.  
+- Generates a SHAP waterfall plot for that applicant, embedded directly into the app.  
+- Displays descriptive text to help users interpret:
+  - Blue bars: factors pushing the prediction towards repayment  
+  - Red bars: factors pushing the prediction towards default  
+
+### Intended Usage
+
+- Credit analysts and product stakeholders can experiment with hypothetical applicants and see how changes in income, DTI, credit history, and employment impact approval outcomes.  
+- Demonstrates a complete path from model development to explainable, interactive deployment suitable for decision support in a lending context.
