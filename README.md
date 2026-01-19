@@ -88,11 +88,6 @@ Instead of using a naïve 50% default probability cutoff, a more conservative de
 
 This reflects a lender’s risk tolerance and aligns the model with business policy.
 
-### Explainability – SHAP
-
-- Built a SHAP `Explainer` on the trained Logistic Regression model and training data to compute local SHAP values.
-- Saved and integrated this explainer into the app to generate applicant-level waterfall plots, showing how each feature pushes the prediction towards repayment or default.
-
 ---
 
 ## Key Insights & Impacts
