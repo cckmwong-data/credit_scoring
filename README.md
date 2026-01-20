@@ -1,6 +1,6 @@
 # Loan Approval Prediction using Logistic Regression
 
-An end-to-end loan approval prediction application using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
+An end-to-end loan approval prediction [application](https://creditscoringprediction.streamlit.app/) using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
 
 <img src="./images/app1.png" width="" height="500">
 
@@ -61,7 +61,7 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 
 ## Key Values & Impacts
 
-Deploying an automated, explainable loan approval and credit scoring application delivers tangible business value across lending operations:
+Deploying an automated, explainable loan approval and credit scoring [application](https://creditscoringprediction.streamlit.app/) delivers tangible business value across lending operations:
 
 - **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing repeatable and defensible credit decisions that align with internal credit policy.
 
@@ -192,8 +192,6 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 ---
 
 ## Streamlit Application
-
-The `credit_scoring.py` Streamlit app operationalizes the notebook work as a user-facing tool:
 
 ### Inputs
 
