@@ -2,6 +2,8 @@
 
 An end-to-end loan approval prediction [application](https://creditscoringprediction.streamlit.app/) using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
 
+*Please click [here](https://youtu.be/psohqe_YtE4) for video demo.*
+
 <img src="./images/app1.png" width="" height="500">
 
 ---
@@ -159,12 +161,7 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 ---
 
-## Technologies Used (Model Explanation)
-
-### Python & Data Stack
-
-- **pandas**, **NumPy** for data manipulation and feature engineering.  
-- **matplotlib**, **seaborn** for exploratory data analysis and visualization.
+## Technologies Used
 
 ### Modeling (scikit-learn)
 
@@ -182,16 +179,11 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 - `pickle.dump` and `pickle.load` used to serialize and reload the model, scaler, and SHAP explainer for deployment.
 
-### App Framework (Streamlit)
-
-- Streamlit provides a lightweight web interface to:
-  - Collect applicant inputs  
-  - Invoke the model pipeline  
-  - Display predictions, decisions, and SHAP-based explanations  
-
 ---
 
 ## Streamlit Application
+
+*Please click [here](https://youtu.be/psohqe_YtE4) for video demo.*
 
 ### Inputs
 
