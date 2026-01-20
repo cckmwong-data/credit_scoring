@@ -2,8 +2,6 @@
 
 An end-to-end loan approval prediction application using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
 
-<img src="./images/app1.png" width="" height="500">
-
 ---
 
 ## Highlights
@@ -19,14 +17,17 @@ An end-to-end loan approval prediction application using Logistic Regression to 
 
 ## Skills Demonstrated
 
-- Supervised learning for binary classification  
-- Credit risk modelling and loan approval decisioning  
-- Feature engineering for financial datasets (DTI, categorical encoding)  
-- Model evaluation and interpretation (coefficients, SHAP, classification metrics)  
-- Handling class imbalance with `class_weight="balanced"`  
-- Persisting models and scalers (pickle)  
-- Building and deploying a data app with Streamlit  
-- Python data stack: pandas, NumPy, scikit-learn, matplotlib, seaborn, shap  
+✔ Supervised learning for binary classification  
+
+✔ Credit risk modelling and loan approval decisioning  
+
+✔ Feature engineering for financial datasets (DTI, categorical encoding)  
+
+✔ Model evaluation and interpretation (coefficients, SHAP, classification metrics)  
+
+✔ Handling class imbalance with `class_weight="balanced"`  
+
+✔ Persisting models and scalers (pickle)  
 
 ---
 
@@ -49,6 +50,23 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 7. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
 <img src="./images/shap.png" width="" height="500">
+
+
+---
+
+## Key Values & Impacts
+
+Deploying an automated, explainable loan approval and credit scoring application delivers tangible business value across lending operations:
+
+- **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing repeatable and defensible credit decisions that align with internal credit policy.
+
+- **Risk Reduction Through Early Default Detection**: Higher recall on defaulters helps reduce credit losses by catching high-risk applicants before origination rather than through collections or charge-offs.
+
+- **Operational Efficiency & Reduced Cycle Times**: Automated assessment shortens decision-making from minutes/hours to milliseconds, increasing application throughput and reducing the need for manual underwriting for straightforward cases.
+
+- **Portfolio-Level Risk Control via Threshold Adjustment**: The default probability threshold offers a tunable risk lever, allowing risk teams to balance approval volume versus risk appetite depending on market conditions and strategic objectives.
+
+- **Enhanced Transparency & Explainability for Stakeholders**: SHAP waterfall plots make each approval or decline auditable and interpretable, supporting compliance requirements, model governance, and fair-lending discussions.
 
 ---
 
@@ -90,20 +108,7 @@ Instead of using a naïve 50% default probability cutoff, a more conservative de
 
 This reflects the lender’s risk tolerance and aligns the model with business policy.
 
----
-
-## Key Insights & Impacts
-
-### Feature Effects
-
-- The Logistic Regression coefficients and SHAP attributions show that DTI and repayment burden are major drivers of default risk.
-- Stronger credit history and certain employment types are associated with improved repayment likelihood.
-
-### Model Performance
-
-- The model achieves a recall of 0.84 for defaulters (class 0), meaning it successfully identifies most risky borrowers.
-- It also records a strong PR-AUC score, reflecting its ability to balance precision and recall in the imbalanced dataset.
-- A very high ROC-AUC of 0.95 shows excellent overall discrimination between repayers and defaulters.
+<img src="./images/result.png" width="" height="250">
 
 ---
 
@@ -193,6 +198,8 @@ The `credit_scoring.py` Streamlit app operationalizes the notebook work as a use
 - `Loan Amount (£)` – used with income to compute DTI  
 - `Employment Status` – radio selection: `Employed`, `Self-Employed`, or `Unemployed`
 
+<img src="./images/inputs.png" width="" height="500">
+
 ### Feature Construction in the App
 
 - Computes DTI in real time: `DTI = Loan Amount / Monthly Income`.  
@@ -219,7 +226,6 @@ The `credit_scoring.py` Streamlit app operationalizes the notebook work as a use
   - Blue bars: factors pushing the prediction towards repayment  
   - Red bars: factors pushing the prediction towards default  
 
-### Intended Usage
+## Author
 
-- Credit analysts and product stakeholders can experiment with hypothetical applicants and see how changes in income, DTI, credit history, and employment impact approval outcomes.  
-- Demonstrates a complete path from model development to explainable, interactive deployment suitable for decision support in a lending context.
+Carmen Wong
