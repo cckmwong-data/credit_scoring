@@ -224,7 +224,9 @@ The `credit_scoring.py` Streamlit app operationalizes the notebook work as a use
 - Generates a SHAP waterfall plot for that applicant, embedded directly into the app.  
 - Displays descriptive text to help users interpret:
   - Blue bars: factors pushing the prediction towards repayment  
-  - Red bars: factors pushing the prediction towards default  
+  - Red bars: factors pushing the prediction towards default
+    
+---
 
 ## Author
 
