@@ -38,7 +38,7 @@ Financial institutions must assess borrower creditworthiness to minimize default
 
 ## Project Overview
 
-A loan [dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. The workflow:
+A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. The workflow:
 
 1. Load and clean the dataset (drop non-predictive identifiers and redundant columns such as `Client_ID` and `Gender`).
 2. Engineer risk-relevant features, notably the Debt-to-Income (DTI) ratio derived from monthly income and repayment amounts.
@@ -54,9 +54,11 @@ A loan [dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 
 ## Key Technical Decisions
 
-### Algorithm Choice – Logistic Regression
+### Algorithm Choice
 
-Chosen for interpretability and suitability in credit risk settings. The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny.
+**Logistics regression** is chosen with considerations of:
+- Interpretability and suitability in credit risk settings.
+- The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny.
 
 ### Feature Engineering
 
@@ -86,7 +88,7 @@ Instead of using a naïve 50% default probability cutoff, a more conservative de
 - Default probability **≤ 35%** → **“APPROVED”**  
 - Default probability **> 35%** → **“DECLINED”**
 
-This reflects a lender’s risk tolerance and aligns the model with business policy.
+This reflects the lender’s risk tolerance and aligns the model with business policy.
 
 ---
 
@@ -111,7 +113,7 @@ This reflects a lender’s risk tolerance and aligns the model with business pol
    - Defined the business problem as predicting borrower default to support loan approval decisions, with a need for interpretability and explainability.
 
 2. **Data Ingestion & Cleaning**  
-   - Imported the Kaggle Loan Approval Classification dataset.  
+   - Imported the [Kaggle Loan Approval Classification dataset](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data).  
    - Dropped non-informative columns (`Client_ID`, `Gender`).  
    - Removed duplicates and checked for missing values.
 
@@ -135,7 +137,6 @@ This reflects a lender’s risk tolerance and aligns the model with business pol
 
 7. **Explainability Integration**  
    - Constructed a SHAP explainer using the trained model and training data.  
-   - Verified that SHAP values aligned with model coefficients and domain intuition.
 
 8. **Model & Artifact Persistence**  
    - Serialized and saved:
