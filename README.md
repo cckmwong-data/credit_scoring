@@ -1,4 +1,4 @@
-# Loan Approval Prediction using Logistic Regression
+# Loan Approval Prediction App using Logistic Regression
 
 An end-to-end loan approval prediction [application](https://creditscoringprediction.streamlit.app/) using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
 
