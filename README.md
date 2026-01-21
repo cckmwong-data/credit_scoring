@@ -32,7 +32,7 @@ Financial institutions must assess borrower creditworthiness to minimize default
 
 ---
 
-## Project Overview
+## Overview
 
 > **Note:**  
 > *This [Streamlit application](https://creditscoringprediction.streamlit.app/) is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
@@ -48,7 +48,6 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 7. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
 <img src="./images/shap.png" width="" height="500">
-
 
 ---
 
@@ -170,48 +169,7 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 - `pickle.dump` and `pickle.load` used to serialize and reload the model, scaler, and SHAP explainer for deployment.
 
----
 
-## Streamlit Application
-
-*Please click [here](https://youtu.be/psohqe_YtE4) for video demo.*
-
-### Inputs
-
-- `Age` (numeric input, 18–100)  
-- `Monthly Income (£)` (numeric input)  
-- `Credit History Score` (slider from 0 = worst to 10 = best)  
-- `Loan Amount (£)` – used with income to compute DTI  
-- `Employment Status` – radio selection: `Employed`, `Self-Employed`, or `Unemployed`
-
-<img src="./images/inputs.png" width="" height="500">
-
-### Feature Construction in the App
-
-- Computes DTI in real time: `DTI = Loan Amount / Monthly Income`.  
-- Converts selected employment status into dummy variables (`Employed`, `Self-Employed`, `Unemployed`).  
-- Assembles a single-row `DataFrame` with the same feature schema used in training:  
-  `['Age', 'DTI', 'Credit_History', 'Employed', 'Self-Employed', 'Unemployed']`.  
-- Applies the persisted scaler (`credit_scaler.pkl`) to standardize the input.
-
-### Prediction & Decision Logic
-
-- Uses the loaded Logistic Regression model (`credit_model.pkl`) to compute:  
-  - `prob_default` – probability of default (class 1)  
-  - `prob_repay` – probability of repayment/non-default (class 0)  
-
-- Applies the 35% default probability threshold:
-  - `prob_default ≤ 0.35` → loan application **“APPROVED ✅”**  
-  - `prob_default > 0.35` → loan application **“DECLINED ❌”**  
-
-### Explainability & Visual Output
-
-- Invokes the loaded SHAP explainer (`credit_explainer.pkl`) on the scaled input row.  
-- Generates a SHAP waterfall plot for that applicant, embedded directly into the app.  
-- Displays descriptive text to help users interpret:
-  - Blue bars: factors pushing the prediction towards repayment  
-  - Red bars: factors pushing the prediction towards default
-    
 ---
 
 ## Author
