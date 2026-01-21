@@ -8,28 +8,19 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ---
 
-## Highlights
-
-- Built a **full pipeline** from raw loan data to a deployed, interactive credit scoring interface.
-- Engineered a **Debt-to-Income (DTI) ratio** feature and transformed employment status into machine-readable dummy variables.
-- Trained a **Logistic Regression** model (with class weighting and feature scaling) to predict borrower default.
-- Evaluated the model with **recall**, **PR-AUC**, **ROC-AUC**, and **F1-score**, focusing on catching true defaulters.
-- Implemented **SHAP explainability** to expose feature contributions at the individual applicant level.
-- Deployed the trained model, scaler, and SHAP explainer via a Streamlit app that returns probabilities, approval decisions, and a SHAP waterfall plot.
-
----
-
 ## Skills Demonstrated
 
-✔ Supervised learning for binary classification  
+✔ Built a **full pipeline** from raw loan data to a deployed, interactive credit scoring interface.
 
-✔ Credit risk modelling and loan approval decisioning  
+✔ Supervised learning for **binary classification**
 
-✔ Feature engineering for financial datasets (DTI, categorical encoding)  
+✔ Credit risk modelling and loan approval decisioning using **Logistic Regression**
 
-✔ Model evaluation and interpretation (coefficients, SHAP, classification metrics)  
+✔ **Feature engineering** for financial datasets (Debt-to-Income (DTI), categorical encoding)  
 
-✔ Handling class imbalance with `class_weight="balanced"`  
+✔ Model evaluation and interpretation (recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score, **SHAP explainability**)  
+
+✔ Handling **class imbalance** with `class_weight="balanced"`  
 
 ✔ Persisting models and scalers (pickle)  
 
@@ -44,7 +35,7 @@ Financial institutions must assess borrower creditworthiness to minimize default
 ## Project Overview
 
 > **Note:**  
-> *This Streamlit application is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
+> *This [Streamlit application](https://creditscoringprediction.streamlit.app/) is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
 
 A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. 
 
