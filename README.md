@@ -104,7 +104,7 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 ---
 
-## Stages of Development
+## Development Pipeline
 
 1. **Data Preparation**: Loaded [Kaggle loan dataset](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data); removed non-informative identifiers; handled duplicates and missing values.
 
