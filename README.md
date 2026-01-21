@@ -105,7 +105,7 @@ Instead of using a naïve 50% default probability cutoff, a more conservative de
 
 This reflects the lender’s risk tolerance and aligns the model with business policy.
 
-<img src="./images/result.png" width="" height="250">
+<img src="./images/result.png" width="" height="220">
 
 ---
 
