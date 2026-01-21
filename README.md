@@ -71,33 +71,28 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 
 ### Algorithm Choice
 
-**Logistics regression** is chosen with considerations of:
+**Logistics regression** is chosen, with the considerations of:
 - Interpretability and suitability in credit risk settings.
 - The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny.
 
 ### Feature Engineering
-
 - Created **DTI** from income and repayment to capture leverage and repayment burden.  
 - **One-hot encoded** the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`).  
 - Dropped redundant raw columns (`Monthly_Income`, `Monthly_Repayment`, original `Employment`) once the engineered variables were in place.
 
 ### Scaling Strategy
-
 - Used **StandardScaler** to standardize features before training Logistic Regression.
 - Logistic Regression benefits from standardized feature variance: scaling features to zero mean and unit variance improves solver stability and makes coefficients more directly comparable across features. This is more suitable here than MinMax scaling, which mainly rescales to a fixed range and is less convenient for interpreting linear model coefficients.
 - The fitted scaler is persisted and reused in the application to ensure consistent preprocessing between training and inference.
 
 ### Class Imbalance Handling
-
 - Set `class_weight="balanced"` in Logistic Regression to give additional weight to the minority class (defaulters), reducing the risk of a high-accuracy but low-recall model on defaults.
 
 ### Evaluation Focus
-
 - Evaluated the model using recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score.  
 - Particular emphasis on recall for defaulters and PR-AUC to ensure genuine defaults are captured with acceptable levels of false positives.
 
 ### Prudent Operational Threshold
-
 Instead of using a naïve 50% default probability cutoff, a more conservative decision threshold of **35% default probability** is used in the Streamlit app:
 
 - Default probability **≤ 35%** → **“APPROVED”**  
@@ -111,64 +106,19 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 ## Stages of Development
 
-1. **Problem Framing & Design**  
-   - Defined the business problem as predicting borrower default to support loan approval decisions, with a need for interpretability and explainability.
+1. **Data Preparation**: Loaded [Kaggle loan dataset](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data); removed non-informative identifiers; handled duplicates and missing values.
 
-2. **Data Ingestion & Cleaning**  
-   - Imported the [Kaggle Loan Approval Classification dataset](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data).  
-   - Dropped non-informative columns (`Client_ID`, `Gender`).  
-   - Removed duplicates and checked for missing values.
+2. **Feature Engineering**: Computed DTI; one-hot encoded employment categories; removed redundant raw columns.
 
-3. **Feature Engineering & Transformation**  
-   - Created `DTI = Monthly_Repayment / Monthly_Income`.  
-   - One-hot encoded `Employment` into `Employed`, `Self-Employed`, and `Unemployed`.  
-   - Converted dummy columns to numeric (1/0) and dropped original employment and raw income/repayment columns as needed.
+3. **Modeling**: Split data (70/30), standardized features, and trained `LogisticRegression(class_weight="balanced")`.
 
-4. **Train/Test Split & Scaling**  
-   - Split data into training (70%) and test (30%) sets.  
-   - Applied `StandardScaler` to the training features and transformed the test features with the same scaler.
+4. **Evaluation**: Assessed via recall on defaulters, PR-AUC, ROC-AUC, precision, F1, and confusion matrix.
 
-5. **Model Training**  
-   - Trained `LogisticRegression(class_weight="balanced", max_iter=1000, random_state=42)` on scaled features.  
-   - Inspected coefficients and odds ratios to understand the relative importance and directionality of each feature.
+5. **Explainability**: Integrated SHAP for local model attribution and decision transparency.
 
-6. **Evaluation & Diagnostics**  
-   - Generated predictions and confusion matrix.  
-   - Calculated key metrics: recall for default class, PR-AUC, ROC-AUC, precision, F1-score.  
-   - Interpreted metric values in the context of risk tolerance and desired trade-offs.
+6. **Artifact Persistence**: Serialized model, scaler, and SHAP explainer for deployment.
 
-7. **Explainability Integration**  
-   - Constructed a SHAP explainer using the trained model and training data.  
-
-8. **Model & Artifact Persistence**  
-   - Serialized and saved:
-     - `credit_model.pkl` – trained Logistic Regression model  
-     - `credit_scaler.pkl` – fitted `StandardScaler`  
-     - `credit_explainer.pkl` – SHAP explainer  
-
-9. **Streamlit App Development & Deployment**  
-   - Built the Streamlit front-end that loads the saved artifacts and provides real-time predictions, explanations, and approval decisions.
-
----
-
-## Technologies Used
-
-### Modeling (scikit-learn)
-
-- `LogisticRegression` for binary classification of `Default_Flag`.  
-- `StandardScaler` for feature standardization.  
-- `train_test_split` for splitting data into training and test sets.  
-- `classification_report`, `confusion_matrix`, `roc_auc_score`, `average_precision_score`, `recall_score` for model evaluation.
-
-### Explainability (SHAP)
-
-- `shap.Explainer` built on the trained Logistic Regression model and training data.  
-- SHAP waterfall plots to show the contribution of each feature to an individual prediction, highlighting which factors push the score towards default or repayment.
-
-### Model Persistence (pickle)
-
-- `pickle.dump` and `pickle.load` used to serialize and reload the model, scaler, and SHAP explainer for deployment.
-
+7. **Application Deployment**: Built [Streamlit app](https://creditscoringprediction.streamlit.app/) enabling real-time scoring, explainability, and loan approval decisions.
 
 ---
 
