@@ -16,7 +16,7 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ✔ Credit risk modelling and loan approval decisioning using **Logistic Regression**
 
-✔ **Feature engineering** for financial datasets (Debt-to-Income (DTI), categorical encoding)  
+✔ **Feature engineering** for financial datasets, including feature creation (Debt-to-Income (DTI) ratio) and categorical encoding (One-Hot encoding)
 
 ✔ Model evaluation and interpretation (recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score, **SHAP explainability**)  
 
