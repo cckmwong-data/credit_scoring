@@ -1,6 +1,6 @@
 # Loan Approval Prediction App using Logistic Regression
 
-An end-to-end [loan approval prediction application](https://creditscoringprediction.streamlit.app/) using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
+An end-to-end [loan approval prediction application](https://creditscoringprediction2.streamlit.app/) using Logistic Regression to model borrower default risk, with SHAP-based explainability and a Streamlit app for interactive what-if analysis and decision support.
 
 *Please click [here](https://youtu.be/psohqe_YtE4) for video demo.*
 
@@ -35,7 +35,7 @@ Financial institutions assess borrower creditworthiness to minimize default risk
 ## Overview
 
 > **Note:**  
-> *This [Streamlit application](https://creditscoringprediction.streamlit.app/) is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
+> *This [Streamlit application](https://creditscoringprediction2.streamlit.app/) is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
 
 A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. 
 
@@ -53,7 +53,7 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 
 ## Key Values & Impacts
 
-Deploying an automated, explainable loan approval and credit scoring [application](https://creditscoringprediction.streamlit.app/) delivers tangible business value across lending operations:
+Deploying an automated, explainable loan approval and credit scoring [application](https://creditscoringprediction2.streamlit.app/) delivers tangible business value across lending operations:
 
 - **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing repeatable and defensible credit decisions that align with internal credit policy.
 
@@ -118,7 +118,7 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 6. **Artifact Persistence**: Serialized model, scaler, and SHAP explainer for deployment.
 
-7. **Application Deployment**: Built [Streamlit app](https://creditscoringprediction.streamlit.app/) enabling real-time scoring, explainability, and loan approval decisions.
+7. **Application Deployment**: Built [Streamlit app](https://creditscoringprediction2.streamlit.app/) enabling real-time scoring, explainability, and loan approval decisions.
 
 ---
 
