@@ -40,10 +40,11 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 1. Load and clean the dataset (drop non-predictive identifiers and redundant columns such as `Client_ID` and `Gender`).
 2. Engineer risk-relevant features, notably the Debt-to-Income (DTI) ratio derived from monthly income and repayment amounts.
 3. Encode employment status as dummy variables (`Employed`, `Self-Employed`, `Unemployed`) to represent employment types numerically.
-4. Use Logistic Regression to predict the binary `Default_Flag` (default vs non-default) based on features including age, DTI, credit history, and employment.
-5. Evaluate performance with multiple classification metrics, emphasizing recall for defaulters and precision–recall/ROC curves.
-6. Build a SHAP explainer to provide local (per-applicant) feature attribution.
-7. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
+4. Use Logistic Regression to predict the binary `Default_Flag` (default = 1 vs non-default = 0) based on financial and demographic features.
+5. A higher positive coefficient in Logistic Regression represents a higher probability of repayment, whereas a more negative coefficient suggests a higher probability of default. DTI ratio is found to be the main driver of whether the loan would default.
+6. Evaluate performance with multiple classification metrics, emphasizing recall for defaulters and precision–recall/ROC curves.
+7. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
+8. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
 <img src="./images/shap.png" width="" height="500">
 
@@ -53,15 +54,15 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 
 Deploying an automated, explainable loan approval and credit scoring [application](https://creditscoringprediction2.streamlit.app/) delivers tangible business value across lending operations:
 
-- **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing repeatable and defensible credit decisions that align with internal credit policy.
+- **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing consistent credit decisions that align with internal credit policy.
 
-- **Risk Reduction Through Early Default Detection**: Higher recall on defaulters helps reduce credit losses by catching high-risk applicants before origination rather than through collections or charge-offs.
+- **Risk Reduction Through Early Default Detection**: Higher recall on defaulters helps reduce credit losses by catching high-risk applicants rather than through collections or charge-offs.
 
 - **Operational Efficiency & Reduced Cycle Times**: Automated assessment shortens decision-making from minutes/hours to milliseconds, increasing application throughput and reducing the need for manual underwriting for straightforward cases.
 
 - **Portfolio-Level Risk Control via Threshold Adjustment**: The default probability threshold offers a tunable risk lever, allowing risk teams to balance approval volume versus risk appetite depending on market conditions and strategic objectives.
 
-- **Enhanced Transparency & Explainability for Stakeholders**: SHAP waterfall plots make each approval or decline auditable and interpretable, supporting compliance requirements, model governance, and fair-lending discussions.
+- **Enhanced Transparency & Explainability for Stakeholders**: SHAP waterfall plots make each approval or decline interpretable, supporting compliance requirements and model governance.
 
 ---
 
@@ -76,7 +77,7 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 ### Feature Engineering
 - Created **DTI** from income and repayment to capture leverage and repayment burden.  
 - **One-hot encoded** the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`).  
-- Dropped redundant raw columns (`Monthly_Income`, `Monthly_Repayment`, original `Employment`) once the engineered variables were in place.
+- Dropped irrelevant (`Client_ID` and `Gender`) and redundant raw columns (`Monthly_Income`, `Monthly_Repayment`, original `Employment`) once the engineered variables were in place.
 
 ### Scaling Strategy
 - Used **StandardScaler** to standardize features before training Logistic Regression.
