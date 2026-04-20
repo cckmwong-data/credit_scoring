@@ -42,18 +42,18 @@ employment_status = st.radio("Employment Status", ("Employed", "Self-Employed", 
 
 # Convert employment status to dummies
 if employment_status == "Employed":
-    employed, self_employed, unemployed = 1, 0, 0
+    self_employed, unemployed = 0, 0
 elif employment_status == "Self-Employed":
-    employed, self_employed, unemployed = 0, 1, 0
+    self_employed, unemployed = 1, 0
 else:
-    employed, self_employed, unemployed = 0, 0, 1
+    self_employed, unemployed = 0, 1
 
 # Define Debt-to-Income ratio
 DTI = balance/ income
 
 # Create dataframe for input
-input_data = pd.DataFrame([[age, DTI, credit_history, employed, self_employed, unemployed]], 
-columns=['Age', 'DTI', 'Credit_History','Employed', 'Self-Employed', 'Unemployed'])
+input_data = pd.DataFrame([[age, DTI, credit_history, self_employed, unemployed]], 
+columns=['Age', 'DTI', 'Credit_History', 'Self-Employed', 'Unemployed'])
 
 # Scale inputs
 input_data_scaled = scaler.transform(input_data)
