@@ -20,7 +20,7 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ✔ Handling **class imbalance** with `class_weight="balanced"`  
 
-✔ Persisting models and scalers (pickle)  
+✔ Persisting models and scalers (pickle) for **deployment of Streamlit application**
 
 ---
 
