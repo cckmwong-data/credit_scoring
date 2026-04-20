@@ -10,8 +10,6 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ## Skills Demonstrated
 
-✔ Built a **full pipeline** from raw loan data to a deployed, interactive credit scoring interface
-
 ✔ Supervised learning for **binary classification**
 
 ✔ Credit risk modelling and loan approval decisioning using **Logistic Regression**
