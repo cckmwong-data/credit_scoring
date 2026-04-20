@@ -39,7 +39,7 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 
 1. Load and clean the dataset (drop non-predictive identifiers and redundant columns such as `Client_ID` and `Gender`).
 2. Engineer risk-relevant features, notably the Debt-to-Income (DTI) ratio derived from monthly income and repayment amounts.
-3. Encode employment status as dummy variables (`Self-Employed`, `Unemployed`) to represent employment types numerically. When both `Self-Employed` and `Unemployed` equal 0, this will mean the applicant is employed. `drop_first=True` is used to avoid multicollinearity of features.
+3. Encode employment status as dummy variables (`Self-Employed`, `Unemployed`) to represent employment types numerically. 
 4. Use Logistic Regression to predict the binary `Default_Flag` (default = 1 vs non-default = 0) based on financial and demographic features.
 5. A higher positive coefficient in Logistic Regression represents a higher probability of repayment, whereas a more negative coefficient suggests a higher probability of default. DTI ratio is found to be the main driver of whether the loan would default.
 6. Evaluate performance with multiple classification metrics, emphasizing recall for defaulters and precision–recall/ROC curves.
@@ -76,7 +76,7 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 
 ### Feature Engineering
 - Created **DTI** from income and repayment to capture leverage and repayment burden.  
-- **One-hot encoded** the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`).  
+- **One-hot encoded** the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`). `drop_first=True` is used to avoid multicollinearity of features. When both `Self-Employed` and `Unemployed` equal 0, this will mean the applicant is employed. 
 - Dropped irrelevant (`Client_ID` and `Gender`) and redundant raw columns (`Monthly_Income`, `Monthly_Repayment`, original `Employment`) once the engineered variables were in place.
 
 ### Scaling Strategy
