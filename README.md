@@ -91,7 +91,7 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 - Evaluated the model using recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score.  
 - Particular emphasis on recall for defaulters and PR-AUC to ensure genuine defaults are captured with acceptable levels of false positives.
 
-<img src="./images/classification.png" width="" height="100">
+<img src="./images/classification.png" width="" height="150">
 
 ### Prudent Operational Threshold
 Instead of using a naïve 50% default probability cutoff, a more conservative decision threshold of **35% default probability** is used in the Streamlit app:
