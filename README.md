@@ -16,7 +16,7 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ✔ **Feature engineering** for financial datasets, including feature creation (Debt-to-Income (DTI) ratio) and categorical encoding (One-Hot encoding)
 
-✔ Model evaluation and interpretation (recall, precision, F1-score, PR-AUC, ROC-AUC, and **SHAP explainability**)  
+✔ Model evaluation and interpretation (**SHAP explainability**)  
 
 ✔ Handling **class imbalance** with `class_weight="balanced"`  
 
