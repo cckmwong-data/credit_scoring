@@ -16,7 +16,7 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ✔ **Feature engineering** for financial datasets, including feature creation (Debt-to-Income (DTI) ratio) and categorical encoding (One-Hot encoding)
 
-✔ Model evaluation and interpretation (recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score, **SHAP explainability**)  
+✔ Model evaluation and interpretation (recall, precision, F1-score, PR-AUC, ROC-AUC, and **SHAP explainability**)  
 
 ✔ Handling **class imbalance** with `class_weight="balanced"`  
 
@@ -42,9 +42,12 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 3. Encode employment status as dummy variables to represent employment types numerically. 
 4. Use Logistic Regression to predict the binary `Default_Flag` (default = 1 vs non-default = 0) based on financial and demographic features.
 5. A higher positive coefficient in Logistic Regression represents a higher probability of repayment, whereas a more negative coefficient suggests a higher probability of default. DTI ratio is found to be the main driver of whether the loan would default.
-6. Evaluate performance with multiple classification metrics, emphasizing recall for defaulters and precision–recall/ROC curves.
-7. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
-8. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
+   
+<img src="./images/coefficients.png" width="" height="500">
+
+7. Evaluate performance with multiple classification metrics, emphasizing  for defaulters and precision–/ROC curves.
+8. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
+9. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
 <img src="./images/shap.png" width="" height="500">
 
@@ -56,7 +59,7 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 
 - **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing consistent credit decisions that align with internal credit policy.
 
-- **Risk Reduction Through Early Default Detection**: Higher recall on defaulters helps reduce credit losses by catching high-risk applicants rather than through collections or charge-offs.
+- **Risk Reduction Through Early Default Detection**: Higher  on defaulters helps reduce credit losses by catching high-risk applicants rather than through collections or charge-offs.
 
 - **Operational Efficiency & Reduced Cycle Times**: Automated assessment shortens decision-making from minutes/hours to milliseconds, increasing application throughput and reducing the need for manual underwriting for straightforward cases.
 
@@ -85,10 +88,10 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 - The fitted scaler is persisted and reused in the application to ensure consistent preprocessing between training and inference.
 
 ### Class Imbalance Handling
-- Set `class_weight="balanced"` in Logistic Regression to give additional weight to the minority class (defaulters), reducing the risk of a high-accuracy but low-recall model on defaults.
+- Set `class_weight="balanced"` in Logistic Regression to give additional weight to the minority class (defaulters), reducing the risk of a high-accuracy but low- model on defaults.
 
 ### Evaluation Focus
-- Evaluated the model using recall, PR-AUC, ROC-AUC, accuracy, precision, and F1-score.  
+- Evaluated the model using recall, F1-score, PR-AUC and ROC-AUC.  
 - Particular emphasis on recall for defaulters and PR-AUC to ensure genuine defaults are captured with acceptable levels of false positives.
 
 <img src="./images/classification.png" width="" height="150">
@@ -113,7 +116,7 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 3. **Modeling**: Split data (70/30), standardized features, and trained `LogisticRegression(class_weight="balanced")`.
 
-4. **Evaluation**: Assessed via recall on defaulters, PR-AUC, ROC-AUC, precision, F1, and confusion matrix.
+4. **Evaluation**: Assessed via  on defaulters, PR-AUC, ROC-AUC, precision, F1, and confusion matrix.
 
 5. **Explainability**: Integrated SHAP for local model attribution and decision transparency.
 
