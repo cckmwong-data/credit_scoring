@@ -116,7 +116,7 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 3. **Modeling**: Split data (70/30), standardized features, and trained `LogisticRegression(class_weight="balanced")`.
 
-4. **Evaluation**: Assessed via  on defaulters, PR-AUC, ROC-AUC, precision, recall, F1, and confusion matrix.
+4. **Evaluation**: Assessed the likelihood of default using PR-AUC, ROC-AUC, precision, recall, F1, and confusion matrix.
 
 5. **Explainability**: Integrated SHAP for local model attribution and decision transparency.
 
