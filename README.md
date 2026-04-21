@@ -45,9 +45,9 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
    
 <img src="./images/coefficients.png" width="" height="150">
 
-7. Evaluate performance with multiple classification metrics, emphasizing  for defaulters and precision–/ROC curves.
-8. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
-9. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
+6. Evaluate performance with multiple classification metrics, emphasizing  for defaulters and precision–/ROC curves.
+7. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
+8. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
 <img src="./images/shap.png" width="" height="500">
 
