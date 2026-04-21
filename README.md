@@ -43,7 +43,7 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 4. Use Logistic Regression to predict the binary `Default_Flag` (default = 1 vs non-default = 0) based on financial and demographic features.
 5. A higher positive coefficient in Logistic Regression represents a higher probability of repayment, whereas a more negative coefficient suggests a higher probability of default. DTI ratio is found to be the main driver of whether the loan would default.
    
-<img src="./images/coefficients.png" width="" height="100">
+<img src="./images/coefficients.png" width="" height="150">
 
 7. Evaluate performance with multiple classification metrics, emphasizing  for defaulters and precision–/ROC curves.
 8. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
