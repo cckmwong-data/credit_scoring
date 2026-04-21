@@ -37,17 +37,13 @@ Financial institutions assess borrower creditworthiness to minimize default risk
 
 A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. 
 
-1. Load and clean the dataset (drop non-predictive identifiers and redundant columns such as `Client_ID` and `Gender`).
+1. Load and clean the dataset (drop non-predictive identifiers columns such as `Client_ID` and `Gender`).
 2. Engineer risk-relevant features, notably the Debt-to-Income (DTI) ratio derived from monthly income and repayment amounts.
-3. Encode employment status as dummy variables to represent employment types numerically. 
+3. Encode `employment` as dummy variables to represent employment types numerically. 
 4. Use Logistic Regression to predict the binary `Default_Flag` (default = 1 vs non-default = 0) based on financial and demographic features.
-5. A higher positive coefficient in Logistic Regression represents a higher probability of repayment, whereas a more negative coefficient suggests a higher probability of default. DTI ratio is found to be the main driver of whether the loan would default.
-   
-<img src="./images/coefficients.png" width="" height="150">
-
-6. Evaluate performance with multiple classification metrics, emphasizing  for missing of defaulters  – F1 Score, PR Curve and ROC Curve.
-7. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
-8. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
+5. Evaluate performance with multiple classification metrics - F1 Score, PR Curve and ROC Curve, emphasizing for missing of defaulters.
+6. Build a SHAP explainer to show the specific reasons why an individual’s loan was approved or denied.
+7. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
 <img src="./images/shap.png" width="" height="500">
 
@@ -59,7 +55,7 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 
 - **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing consistent credit decisions that align with internal credit policy.
 
-- **Risk Reduction Through Early Default Detection**: Higher  on defaulters helps reduce credit losses by catching high-risk applicants rather than through collections or charge-offs.
+- **Risk Reduction Through Early Default Detection**: Helps reduce credit losses by catching high-risk applicants rather than through collections or charge-offs.
 
 - **Operational Efficiency & Reduced Cycle Times**: Automated assessment shortens decision-making from minutes/hours to milliseconds, increasing application throughput and reducing the need for manual underwriting for straightforward cases.
 
@@ -75,11 +71,13 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 
 **Logistics regression** is chosen, with the considerations of:
 - Interpretability and suitability in credit risk settings.
-- The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny.
+- The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny. DTI ratio is found to be the main driver of whether the loan would likely default.
+
+<img src="./images/coefficients.png" width="" height="150">
 
 ### Feature Engineering
 - Created **DTI** from income and repayment to capture leverage and repayment burden.  
-- **One-hot encoded** the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`). `drop_first=True` is used to avoid multicollinearity of features. When both `Self-Employed` and `Unemployed` equal 0, this will mean the applicant is employed. 
+- **One-hot encoded** the `Employment` categorical variable, then converted booleans (`True`/`False`) into numeric form (`1`/`0`). `drop_first=True` is used to **avoid multicollinearity** of features. When both `Self-Employed` and `Unemployed` equal 0, this will mean the applicant is employed. 
 - Dropped irrelevant (`Client_ID` and `Gender`) and redundant raw columns (`Monthly_Income`, `Monthly_Repayment`, original `Employment`) once the engineered variables were in place.
 
 ### Scaling Strategy
@@ -88,7 +86,7 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 - The fitted scaler is persisted and reused in the application to ensure consistent preprocessing between training and inference.
 
 ### Class Imbalance Handling
-- Set `class_weight="balanced"` in Logistic Regression to give additional weight to the minority class (defaulters), reducing the risk of a high-accuracy but low- model on defaults.
+- Set `class_weight="balanced"` in Logistic Regression to give additional weight to the minority class (defaulters), reducing the risk of a high-accuracy but low-model on defaults.
 
 ### Evaluation Focus
 - Evaluated the model using recall, F1-score, PR-AUC and ROC-AUC.  
@@ -118,12 +116,11 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 4. **Evaluation**: Assessed the likelihood of default using PR-AUC, ROC-AUC, precision, recall, F1, and confusion matrix.
 
-5. **Explainability**: Integrated SHAP for local model attribution and decision transparency.
+5. **Artifact Persistence**: Serialized model, scaler, and SHAP explainer for deployment.
 
-6. **Artifact Persistence**: Serialized model, scaler, and SHAP explainer for deployment.
+6. **Application Deployment**: Built [Streamlit app](https://creditscoringprediction2.streamlit.app/) enabling real-time scoring, explainability, and loan approval decisions.
 
-7. **Application Deployment**: Built [Streamlit app](https://creditscoringprediction2.streamlit.app/) enabling real-time scoring, explainability, and loan approval decisions.
-
+7. **Explainability**: Integrated SHAP for local model attribution and decision transparency.
 ---
 
 ## Author
