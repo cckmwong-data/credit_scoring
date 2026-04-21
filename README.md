@@ -73,7 +73,7 @@ Deploying an automated, explainable loan approval and credit scoring [applicatio
 - Interpretability and suitability in credit risk settings.
 - The model’s coefficients map directly to the direction and strength of each feature’s influence on default vs repayment, which is important for explainability and potential regulatory scrutiny. DTI ratio is found to be the main driver of whether the loan would likely default.
 
-<img src="./images/coefficients.png" width="" height="120">
+<img src="./images/coefficients.png" width="" height="130">
 
 ### Feature Engineering
 - Created **DTI** from income and repayment to capture leverage and repayment burden.  
