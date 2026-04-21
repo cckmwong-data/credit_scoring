@@ -112,7 +112,7 @@ This reflects the lender’s risk tolerance and aligns the model with business p
 
 1. **Data Preparation**: Loaded [Kaggle loan dataset](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data); removed non-informative identifiers; handled duplicates and missing values.
 
-2. **Feature Engineering**: Computed DTI; one-hot encoded employment categories; removed redundant raw columns.
+2. **Feature Engineering**: Computed DTI and one-hot encoded employment categories.
 
 3. **Modeling**: Split data (70/30), standardized features, and trained `LogisticRegression(class_weight="balanced")`.
 
