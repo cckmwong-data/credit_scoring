@@ -8,6 +8,22 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ---
 
+## Key Values & Impacts
+
+Deploying an automated, explainable loan approval and credit scoring [application](https://creditscoringprediction2.streamlit.app/) delivers tangible business value across lending operations:
+
+- **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing consistent credit decisions that align with internal credit policy.
+
+- **Risk Reduction Through Early Default Detection**: Helps reduce credit losses by catching high-risk applicants rather than through collections or charge-offs.
+
+- **Operational Efficiency & Reduced Cycle Times**: Automated assessment shortens decision-making from minutes/hours to milliseconds, increasing application throughput and reducing the need for manual underwriting for straightforward cases.
+
+- **Portfolio-Level Risk Control via Threshold Adjustment**: The default probability threshold offers a tunable risk lever, allowing risk teams to balance approval volume versus risk appetite depending on market conditions and strategic objectives.
+
+- **Enhanced Transparency & Explainability for Stakeholders**: SHAP waterfall plots make each approval or decline interpretable, supporting compliance requirements and model governance.
+  
+---
+
 ## Skills Demonstrated
 
 ✔ Supervised learning for **binary classification**
@@ -49,22 +65,6 @@ A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approv
 7. Deploy the final model, scaler, and SHAP explainer in a Streamlit app that accepts user inputs, returns predicted default/repayment probabilities, applies an explicit decision threshold, and visualizes the drivers of each decision through a SHAP waterfall plot.
 
 <img src="./images/shap.png" width="" height="500">
-
----
-
-## Key Values & Impacts
-
-Deploying an automated, explainable loan approval and credit scoring [application](https://creditscoringprediction2.streamlit.app/) delivers tangible business value across lending operations:
-
-- **Improved Credit Decision Consistency**: Standardized risk scoring removes subjective variations, producing consistent credit decisions that align with internal credit policy.
-
-- **Risk Reduction Through Early Default Detection**: Helps reduce credit losses by catching high-risk applicants rather than through collections or charge-offs.
-
-- **Operational Efficiency & Reduced Cycle Times**: Automated assessment shortens decision-making from minutes/hours to milliseconds, increasing application throughput and reducing the need for manual underwriting for straightforward cases.
-
-- **Portfolio-Level Risk Control via Threshold Adjustment**: The default probability threshold offers a tunable risk lever, allowing risk teams to balance approval volume versus risk appetite depending on market conditions and strategic objectives.
-
-- **Enhanced Transparency & Explainability for Stakeholders**: SHAP waterfall plots make each approval or decline interpretable, supporting compliance requirements and model governance.
 
 ---
 
