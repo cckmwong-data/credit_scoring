@@ -24,6 +24,11 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ---
 
+## Technical Notes
+
+> **Note:**  
+> *This [Streamlit application](https://creditscoringprediction2.streamlit.app/) is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
+
 ## Problem Statement
 
 Financial institutions assess borrower creditworthiness to minimize default risk, but manual or rule-based approaches can be inconsistent and suboptimal. This project aims to build an interpretable, data-driven model that predicts whether a borrower will default on a loan and to operationalize that model in a way that supports consistent, transparent loan approval decisions.
@@ -31,9 +36,6 @@ Financial institutions assess borrower creditworthiness to minimize default risk
 ---
 
 ## Overview
-
-> **Note:**  
-> *This [Streamlit application](https://creditscoringprediction2.streamlit.app/) is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
 
 A [loan dataset from Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) is used to model borrower default behavior. 
 
