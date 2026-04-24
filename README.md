@@ -26,8 +26,9 @@ An end-to-end [loan approval prediction application](https://creditscoringpredic
 
 ## Technical Notes
 
-> **Note:**  
 > *This [Streamlit application](https://creditscoringprediction2.streamlit.app/) is hosted on the free Tier of Streamlit Community Cloud. If the app has been idle for more than 12 hours, it may take some time to reactivate. In such cases, please click the button saying “Yes, get this app back up!” to relaunch the application. Thank you for your patience.*
+
+---
 
 ## Problem Statement
 
